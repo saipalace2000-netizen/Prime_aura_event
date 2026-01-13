@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================
+   GLOBAL BASE STYLES (Luxury Pink)
+============================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-pink-50 text-pink-800 antialiased;
+  font-family: "Poppins", "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Remove extra scrollbar issues */
+* {
+  box-sizing: border-box;
+}
+
+/* ============================
+   SCROLLBAR (Luxury Pink)
+============================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffe4ec;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ec4899, #f472b6);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #db2777, #ec4899);
+}
+
+/* ============================
+   FLOATING LOGO ANIMATION
+============================ */
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) scale(1.02);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+/* ============================
+   SOFT PULSE GLOW
+============================ */
+
+@keyframes pulseSlow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 6s ease-in-out infinite;
+}
+
+/* ============================
+   FLOATING HEARTS
+============================ */
+
+@keyframes heartFloat {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-120vh) scale(1.4);
+    opacity: 0;
+  }
+}
+
+.animate-heart-float {
+  animation-name: heartFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Heart glow effect */
+.heart-glow {
+  filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.45));
+}
+
+/* ============================
+   WHATSAPP FLOAT BUTTON
+============================ */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 9999;
+  animation: pulseSlow 4s ease-in-out infinite;
+}
+
+/* ============================
+   BUTTON MICRO-INTERACTIONS
+============================ */
+
+.btn-primary {
+  @apply px-8 py-3 rounded-full text-white bg-gradient-to-r from-pink-500 to-rose-500 shadow-lg transition;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  @apply px-8 py-3 rounded-full border border-pink-400 text-pink-700 transition;
+}
+
+.btn-outline:hover {
+  background: rgba(236, 72, 153, 0.08);
+}
+
+/* ============================
+   SECTION SPACING
+============================ */
+
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* ============================
+   FADE-IN ON LOAD
+============================ */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 1.1s ease forwards;
+}
+
+/* ============================
+   IMAGE SMOOTHNESS
+============================ */
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ============================
+   BEAUTIFUL CONTAINER LOOK (Optional helper)
+============================ */
+
+.page-wrap {
+  @apply min-h-screen bg-pink-50;
+}
+
+.card-lux {
+  @apply rounded-3xl bg-white shadow-xl border border-pink-200/60;
+}
+
+/* ============================
+   MOBILE OPTIMIZATION
+============================ */
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 16px;
+    right: 16px;
+  }
+}
