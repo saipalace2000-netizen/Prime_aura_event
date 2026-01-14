@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from "react";
 import { FaCheckCircle, FaWhatsapp, FaTimes } from "react-icons/fa";
-import { CONTACT } from "../config/contact";
+import { CONTACT, makeWhatsAppLink } from "../config/contact";
 
 export default function Profiles() {
   const [selected, setSelected] = useState(null);
@@ -27,13 +27,7 @@ export default function Profiles() {
       "isha",
     ];
 
-    const blockedRussianNames = [
-      "olga",
-      "ekaterina",
-      "karina",
-      "maria",
-      "sofia",
-    ];
+    const blockedRussianNames = ["olga", "ekaterina", "karina", "maria", "sofia"];
 
     /* 🇮🇳 INDIAN MODELS */
     const indianList = Object.entries(indian)
@@ -113,18 +107,21 @@ export default function Profiles() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // ✅ WhatsApp Link Generator (Uses ONLY contact.js)
   const getWaLink = (modelName) => {
-    const msg =
-      `${CONTACT.whatsappDefaultMessage}\n\n` +
-      `✅ I want to book: *${modelName}*\n` +
-      `📍 Service: Premium Booking\n` +
-      `⏳ Duration: (Please share options)\n` +
-      `📅 Date: (Tell me available slots)\n`;
+  const msg =
+    `${CONTACT.whatsappDefaultMessage}\n\n` +
+    `✅ I want to book: *${modelName}*\n` +
+    `📍 Service: Premium Booking\n` +
+    `⏳ Duration: Please share available options\n` +
+    `📅 Date: Please share available slots\n`;
 
-    return `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
-      msg
-    )}`;
-  };
+  return makeWhatsAppLink(
+    CONTACT.primary?.phoneRaw || CONTACT.secondary?.phoneRaw,
+    msg
+  );
+};
+
 
   const ProfileCard = ({ model }) => (
     <button
@@ -152,12 +149,8 @@ export default function Profiles() {
 
       <div className="p-4">
         <div className="flex items-center gap-2">
-          <h3 className="text-lg font-extrabold text-pink-700">
-            {model.name}
-          </h3>
-          {model.verified && (
-            <FaCheckCircle className="text-blue-500 text-lg" />
-          )}
+          <h3 className="text-lg font-extrabold text-pink-700">{model.name}</h3>
+          {model.verified && <FaCheckCircle className="text-blue-500 text-lg" />}
         </div>
         <p className="text-sm text-pink-500">{model.collection}</p>
       </div>
@@ -167,7 +160,6 @@ export default function Profiles() {
   return (
     <div className="min-h-screen px-6 pt-28 pb-14 bg-pink-50">
       <div className="max-w-7xl mx-auto">
-
         {/* TITLE */}
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-pink-700">
@@ -206,42 +198,60 @@ export default function Profiles() {
       {/* MODAL */}
       {selected && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center px-4"
           onClick={() => setSelected(null)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
             className="bg-white rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden"
           >
+            {/* Header */}
             <div className="flex justify-between items-center p-5 border-b">
-              <h3 className="text-2xl font-extrabold text-pink-700">
-                {selected.name}
-              </h3>
-              <button onClick={() => setSelected(null)}>
-                <FaTimes />
+              <div>
+                <h3 className="text-2xl font-extrabold text-pink-700">
+                  {selected.name}
+                </h3>
+                <p className="text-sm text-pink-600/70">
+                  {selected.collection} • {selected.type}
+                </p>
+              </div>
+
+              <button
+                onClick={() => setSelected(null)}
+                className="w-10 h-10 rounded-full bg-pink-50 border border-pink-200 flex items-center justify-center hover:bg-pink-100 transition"
+                aria-label="Close"
+              >
+                <FaTimes className="text-pink-700" />
               </button>
             </div>
 
+            {/* Body */}
             <div className="grid md:grid-cols-2">
               <img
                 src={selected.src}
                 alt={selected.name}
-                className="h-full object-cover"
+                className="w-full h-[380px] md:h-full object-cover"
               />
 
               <div className="p-8">
-                <p className="text-pink-600">
-                  {selected.collection} • {selected.type}
+                <p className="text-pink-600/90 leading-relaxed">
+                  Book with confidence. We ensure privacy, premium quality, and
+                  fast response via WhatsApp.
                 </p>
 
                 <a
                   href={getWaLink(selected.name)}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-6 flex items-center justify-center gap-2 btn-primary"
+                  className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-pink-600 px-6 py-3 text-white font-bold shadow-lg hover:bg-pink-500 transition"
                 >
-                  <FaWhatsapp /> Book on WhatsApp
+                  <FaWhatsapp className="text-xl" />
+                  Book on WhatsApp
                 </a>
+
+                <p className="mt-3 text-xs text-pink-600/70 text-center">
+                  * We respect your privacy. Premium bookings only.
+                </p>
               </div>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import FloatingHearts from "../components/FloatingHearts";
-import { CONTACT } from "../config/contact";
+import { CONTACT, PRIMARY_WHATSAPP_LINK } from "../config/contact";
+
 import {
   FaWhatsapp,
   FaCheckCircle,
@@ -14,9 +15,7 @@ import {
 } from "react-icons/fa";
 
 export default function Home() {
-  const waLink = `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
-    CONTACT.whatsappDefaultMessage
-  )}`;
+
 
   return (
     <div className="bg-pink-50 relative overflow-hidden">
@@ -98,13 +97,14 @@ export default function Home() {
             </Link>
 
             <a
-              href={waLink}
+              href={PRIMARY_WHATSAPP_LINK}
               target="_blank"
               rel="noreferrer"
               className="btn-outline text-lg flex items-center gap-2"
             >
               <FaWhatsapp /> WhatsApp Booking
             </a>
+
           </div>
 
           <div className="mt-8 flex items-center justify-center gap-3 flex-wrap text-sm md:text-base text-pink-700/80">
@@ -850,13 +850,14 @@ export default function Home() {
               </Link>
 
               <a
-                href={waLink}
-                target="_blank"
-                rel="noreferrer"
-                className="px-8 py-3 border border-white text-white rounded-full font-bold"
-              >
-                WhatsApp Inquiry
-              </a>
+  href={PRIMARY_WHATSAPP_LINK}
+  target="_blank"
+  rel="noreferrer"
+  className="px-8 py-3 border border-white text-white rounded-full font-bold"
+>
+  WhatsApp Inquiry
+</a>
+
             </div>
 
             <p className="mt-6 text-xs text-white/70">

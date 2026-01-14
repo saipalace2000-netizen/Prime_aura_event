@@ -1,5 +1,12 @@
 import FloatingHearts from "../components/FloatingHearts";
-import { CONTACT } from "../config/contact";
+import {
+  CONTACT,
+  PRIMARY_WHATSAPP_LINK,
+  PRIMARY_TEL_LINK,
+  SECONDARY_WHATSAPP_LINK,
+  SECONDARY_TEL_LINK,
+} from "../config/contact";
+
 import {
   FaWhatsapp,
   FaPhoneAlt,
@@ -7,14 +14,10 @@ import {
   FaInstagram,
   FaFacebookF,
   FaMapMarkerAlt,
+  FaClock,
 } from "react-icons/fa";
 
 export default function Contact() {
-  const waLink = `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
-    CONTACT.whatsappDefaultMessage
-  )}`;
-
-  const telLink = `tel:${(CONTACT.phoneNumber || "").replace(/\s/g, "")}`;
   const mailLink = `mailto:${CONTACT.email}`;
 
   return (
@@ -46,11 +49,19 @@ export default function Contact() {
                 Choose your preferred way to contact us below.
               </p>
 
+              {/* Timing */}
+              {CONTACT.hours ? (
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-pink-50 border border-pink-200 px-4 py-2 text-pink-700 font-semibold text-sm">
+                  <FaClock className="text-pink-500" />
+                  {CONTACT.hours}
+                </div>
+              ) : null}
+
               {/* CONTACT BUTTONS */}
               <div className="mt-6 grid gap-4">
-                {/* WhatsApp */}
+                {/* WhatsApp - Primary */}
                 <a
-                  href={waLink}
+                  href={PRIMARY_WHATSAPP_LINK}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-between rounded-2xl border border-pink-200 bg-pink-50 px-5 py-4 hover:shadow-md transition"
@@ -60,7 +71,7 @@ export default function Contact() {
                       <FaWhatsapp className="text-white text-2xl" />
                     </div>
                     <div>
-                      <p className="font-bold text-pink-800">WhatsApp</p>
+                      <p className="font-bold text-pink-800">WhatsApp (Primary)</p>
                       <p className="text-sm text-pink-600/70">
                         Instant booking & availability
                       </p>
@@ -69,9 +80,32 @@ export default function Contact() {
                   <span className="text-pink-600 font-semibold">Open →</span>
                 </a>
 
-                {/* Call */}
+                {/* WhatsApp - Secondary */}
                 <a
-                  href={telLink}
+                  href={SECONDARY_WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-between rounded-2xl border border-pink-200 bg-pink-50 px-5 py-4 hover:shadow-md transition"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center shadow">
+                      <FaWhatsapp className="text-white text-2xl" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-pink-800">
+                        WhatsApp (Secondary)
+                      </p>
+                      <p className="text-sm text-pink-600/70">
+                        Backup number if primary busy
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-pink-600 font-semibold">Open →</span>
+                </a>
+
+                {/* Call - Primary */}
+                <a
+                  href={PRIMARY_TEL_LINK}
                   className="flex items-center justify-between rounded-2xl border border-pink-200 bg-pink-50 px-5 py-4 hover:shadow-md transition"
                 >
                   <div className="flex items-center gap-4">
@@ -79,9 +113,28 @@ export default function Contact() {
                       <FaPhoneAlt className="text-white text-xl" />
                     </div>
                     <div>
-                      <p className="font-bold text-pink-800">Call Us</p>
+                      <p className="font-bold text-pink-800">Call (Primary)</p>
                       <p className="text-sm text-pink-600/70">
-                        {CONTACT.phoneNumber}
+                        {CONTACT.primary.phone}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="text-pink-600 font-semibold">Call →</span>
+                </a>
+
+                {/* Call - Secondary */}
+                <a
+                  href={SECONDARY_TEL_LINK}
+                  className="flex items-center justify-between rounded-2xl border border-pink-200 bg-pink-50 px-5 py-4 hover:shadow-md transition"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-pink-500 flex items-center justify-center shadow">
+                      <FaPhoneAlt className="text-white text-xl" />
+                    </div>
+                    <div>
+                      <p className="font-bold text-pink-800">Call (Secondary)</p>
+                      <p className="text-sm text-pink-600/70">
+                        {CONTACT.secondary.phone}
                       </p>
                     </div>
                   </div>
@@ -147,9 +200,7 @@ export default function Contact() {
 
                 <div className="mt-3 flex items-start gap-3">
                   <FaMapMarkerAlt className="text-pink-500 text-xl mt-1" />
-                  <p className="text-pink-700 font-semibold">
-                    {CONTACT.address}
-                  </p>
+                  <p className="text-pink-700 font-semibold">{CONTACT.address}</p>
                 </div>
 
                 <p className="mt-3 text-sm text-pink-600/80 leading-relaxed">

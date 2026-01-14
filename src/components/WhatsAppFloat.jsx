@@ -1,21 +1,21 @@
 import { FaWhatsapp } from "react-icons/fa";
-import { CONTACT } from "../config/contact";
+import { CONTACT, PRIMARY_WHATSAPP_LINK } from "../config/contact";
 
 export default function WhatsAppFloat() {
-  const waLink = `https://wa.me/${CONTACT.whatsappNumber}?text=${encodeURIComponent(
-    CONTACT.whatsappDefaultMessage
-  )}`;
-
   return (
     <a
-      href={waLink}
+      href={PRIMARY_WHATSAPP_LINK}
       target="_blank"
       rel="noreferrer"
-      className="whatsapp-float"
-      aria-label="WhatsApp"
-      title="WhatsApp Booking"
+      aria-label={`WhatsApp ${CONTACT.brandName}`}
+      title={`Chat on WhatsApp • ${CONTACT.brandName}`}
+      className="fixed bottom-6 right-6 z-50"
     >
-      <div className="w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-xl hover:scale-105 transition">
+      {/* Glow + Pulse */}
+      <span className="absolute inset-0 rounded-full bg-green-500/30 blur-xl animate-pulse" />
+
+      {/* Button */}
+      <div className="relative w-14 h-14 rounded-full bg-green-500 flex items-center justify-center shadow-xl transition duration-200 hover:scale-110 active:scale-95">
         <FaWhatsapp className="text-white text-3xl" />
       </div>
     </a>
