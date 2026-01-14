@@ -30,7 +30,7 @@ export default function Standards() {
           <div className="mt-8 grid md:grid-cols-2 gap-6">
             {[
               {
-                title: "Adults Only (18+)",
+                title: "Adults Only (19+)",
                 desc: "Prime Aura Events is strictly intended for adults only. Any misuse is not tolerated.",
               },
               {
