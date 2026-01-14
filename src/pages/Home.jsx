@@ -76,10 +76,12 @@ export default function Home() {
         <div className="max-w-6xl w-full text-center">
           <div className="flex justify-center mb-8">
             <img
-              src="/pictures/prime_logo.png"
-              alt={CONTACT.brandName}
-              className="h-44 md:h-60 lg:h-72 w-auto animate-float-slow drop-shadow-2xl"
-            />
+  src="/pictures/prime_logo.png"
+  alt={CONTACT.brandName}
+  loading="lazy"
+  className="h-44 md:h-60 lg:h-72 w-auto animate-float-slow drop-shadow-2xl"
+/>
+
           </div>
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-pink-700 drop-shadow-sm">
@@ -850,13 +852,13 @@ export default function Home() {
               </Link>
 
               <a
-  href={PRIMARY_WHATSAPP_LINK}
-  target="_blank"
-  rel="noreferrer"
-  className="px-8 py-3 border border-white text-white rounded-full font-bold"
->
-  WhatsApp Inquiry
-</a>
+                href={PRIMARY_WHATSAPP_LINK}
+                target="_blank"
+                rel="noreferrer"
+                className="px-8 py-3 border border-white text-white rounded-full font-bold"
+              >
+                WhatsApp Inquiry
+              </a>
 
             </div>
 
